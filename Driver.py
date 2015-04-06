@@ -779,7 +779,12 @@ class Driver:
             print("no such folder")
             return
 
-        directory = Directory(self, parent_directory.path + filename, descriptor_id)
+        try:
+            directory = Directory(self, parent_directory.path + filename, descriptor_id)
+        except DFile.NonDirectory:
+            print filepath + ": is not a directory"
+            return
+
 
         # check is directory empty?
         links = directory.ls()
